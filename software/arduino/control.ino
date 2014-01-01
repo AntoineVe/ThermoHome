@@ -1,24 +1,31 @@
+// Le programme déclanche un relais et allume une LED (Jaune) quand la température moyenne 
+// sur un temps définie (2 minutes ici) est en dessous d'un objectif de température (TempObj)
+// Quand la température est correcte, une LED (Verte) est allumée.
+
+// Librairie disponible sur http://www.pjrc.com/teensy/td_libs_OneWire.html
 #include <OneWire.h>
-const int DS18B20 = 12;
-const int Bleu = 2;
-const int Vert = 4;
-const int Rouge = 7;
-const int Relais = 3;
-float TempObj = 20.00;
-int RelaisActif = 0;
-int t = 0;
-int Temperature[60];
-float TempMoy = 0.00;
-float TempSum = 0.00;
-OneWire	ds(DS18B20);
+
+// Définition des ports I/O sur l'arduino
+const int Jaune = 2;
+const int Verte = 3;
+const int Relais = 4;
+const int DS18B20 = 5;
+
+// Dans tout le programme, on travaille (un maximum) avec des entiers, donc en "centidegré Celsius"
+int TempObj = 2000; // Définie l'objectif de température
+int t = 0; // Variable utilisée pour le compteur-minuterie
+int Temperature[60]; // Tableau dans lequel sera enregistré les températures du capteur
+int TempMoy = 0; // Déclare la variable pour la température moyenne
+OneWire	ds(DS18B20); // Déclare le capteur DS18B20
+
 void setup(void) {
 	Serial.begin(9600);
 	pinMode(DS18B20, INPUT);
-	pinMode(Bleu, OUTPUT);
-	pinMode(Vert, OUTPUT);
-	pinMode(Rouge, OUTPUT);
+	pinMode(Verte, OUTPUT);
+	pinMode(Jaune, OUTPUT);
 	pinMode(Relais, OUTPUT);
 }
+
 float getTemp() {
 	//Code from http://bildr.org/2011/07/ds18b20-arduino/
 	//And http://www.pjrc.com/teensy/td_libs_OneWire.html
@@ -65,42 +72,33 @@ float getTemp() {
 
 	return TemperatureSum;
 }
+
 void loop(void) {
-	float Temp = (getTemp() - 1.70);
-	if(TempMoy == 0.00) {
-		TempMoy = Temp;
+	int Temp = round(getTemp() * 10) * 10; // Précision à 0,1°C
+	Temp = Temp - 90; // Soustrait l'autoéchauffement (mesuré)
+	if(TempMoy == 0) {
+		TempMoy = Temp; // Utile pour le premier calcul de moyenne
 	}
 	if(t < 60) { // temps pour la moyenne (selon le delay())
-		Temperature[t] = Temp * 100;
-		for(int i = 0; i < t; i = i + 1) {
-			TempMoy = ((Temperature[i] / 100.00) + TempMoy) / 2;
+		Temperature[t] = Temp;
+		for(int i = 0; i < t; i = i + 1) { // Cette boucle permet de récupérer les valeurs
+			TempMoy = (Temperature[i] + TempMoy) / 2; // et de calculer la moyenne
 		}
 		t = t + 1;
 	}
 	else {
-		t = 0;
-		TempSum = 0.00;
-		if(TempMoy <= (TempObj)) {
-			digitalWrite(Bleu, HIGH);
-			digitalWrite(Vert, LOW);
-			digitalWrite(Rouge, LOW);
+		t = 0; // Replace le compteur de la minuterie à zéro
+		if(TempMoy < TempObj) { // Si la température est inférieure à l'objectif
+			digitalWrite(Jaune, HIGH);
+			digitalWrite(Verte, LOW);
 			digitalWrite(Relais, HIGH);
-			RelaisActif = 1;
-		}
-		else if(TempMoy >= (TempObj + 1)) {
-			digitalWrite(Bleu, LOW);
-			digitalWrite(Vert, LOW);
-			digitalWrite(Rouge, HIGH);
-			digitalWrite(Relais, LOW);
-			RelaisActif = 0;
 		}
 		else {
-			digitalWrite(Bleu, LOW);
-			digitalWrite(Vert, HIGH);
-			digitalWrite(Rouge, LOW);
+			digitalWrite(Jaune, LOW);
+			digitalWrite(Verte, HIGH);
 			digitalWrite(Relais, LOW);
-			RelaisActif = 0;
 		}
 	}
+	Serial.println(Temp);
 	delay(2000);
 }
