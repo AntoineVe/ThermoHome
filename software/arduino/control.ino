@@ -6,10 +6,8 @@
 #include <OneWire.h>
 
 // Définition des ports I/O sur l'arduino
-const int Jaune = 2;
-const int Verte = 3;
-const int Relais = 4;
-const int DS18B20 = 5;
+const int Relais = 2;
+const int DS18B20 = 3;
 
 // Dans tout le programme, on travaille (un maximum) avec des entiers, donc en "centidegré Celsius"
 int TempObj = 2000; // Définie l'objectif de température
@@ -21,8 +19,6 @@ OneWire	ds(DS18B20); // Déclare le capteur DS18B20
 void setup(void) {
 	Serial.begin(9600);
 	pinMode(DS18B20, INPUT);
-	pinMode(Verte, OUTPUT);
-	pinMode(Jaune, OUTPUT);
 	pinMode(Relais, OUTPUT);
 }
 
@@ -89,13 +85,9 @@ void loop(void) {
 	else {
 		t = 0; // Replace le compteur de la minuterie à zéro
 		if(TempMoy < TempObj) { // Si la température est inférieure à l'objectif
-			digitalWrite(Jaune, HIGH);
-			digitalWrite(Verte, LOW);
 			digitalWrite(Relais, HIGH);
 		}
 		else {
-			digitalWrite(Jaune, LOW);
-			digitalWrite(Verte, HIGH);
 			digitalWrite(Relais, LOW);
 		}
 	}
