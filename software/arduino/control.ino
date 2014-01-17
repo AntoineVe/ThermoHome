@@ -71,7 +71,7 @@ float getTemp() {
 
 void loop(void) {
 	int Temp = round(getTemp() * 10) * 10; // Précision à 0,1°C
-	Temp = Temp - 210; // Soustrait l'autoéchauffement  (mesuré)
+	Temp = Temp - 180; // Soustrait l'autoéchauffement  (mesuré)
 	if(TempMoy == 0) {
 		TempMoy = Temp; // Utile pour le premier calcul de moyenne
 	}
