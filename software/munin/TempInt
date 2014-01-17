@@ -1,0 +1,15 @@
+#!/bin/bash
+TEMP=$(curl -s http://xbian:8000/temp2munin.txt) # /!\ Adresse du raspberry 
+case $1 in 
+	config)
+		cat <<'EOM'
+graph_title Temperature interieure
+graph_vlabel oC
+graph_scale no
+graph_args --lower-limit 15 --upper-limit 25
+graph_category sensors
+Temp.label Temperature
+EOM
+		exit 0;;
+esac
+	echo $TEMP
