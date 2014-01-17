@@ -71,10 +71,16 @@ float getTemp() {
 
 void loop(void) {
 	int Temp = round(getTemp() * 10) * 10; // Précision à 0,1°C
-	Temp = Temp - 180; // Soustrait l'autoéchauffement  (mesuré)
+	Temp = Temp - 200; // Soustrait l'autoéchauffement  (mesuré)
 	if(TempMoy == 0) {
 		TempMoy = Temp; // Utile pour le premier calcul de moyenne
 	}
+	if(TempMoy < TempObj) { // Si la température est inférieure à l'objectif
+			digitalWrite(Relais, HIGH);
+		}
+		else {
+			digitalWrite(Relais, LOW);
+		}
 	if(t < 60) { // temps pour la moyenne (selon le delay())
 		Temperature[t] = Temp;
 		for(int i = 0; i < t; i = i + 1) { // Cette boucle permet de récupérer les valeurs
@@ -84,12 +90,6 @@ void loop(void) {
 	}
 	else {
 		t = 0; // Replace le compteur de la minuterie à zéro
-		if(TempMoy < TempObj) { // Si la température est inférieure à l'objectif
-			digitalWrite(Relais, HIGH);
-		}
-		else {
-			digitalWrite(Relais, LOW);
-		}
 	}
 	Serial.print(Temp);
 	Serial.print('&');
