@@ -91,6 +91,10 @@ void loop(void) {
 			digitalWrite(Relais, LOW);
 		}
 	}
-	Serial.println(Temp);
+	Serial.print(Temp);
+	Serial.print('&');
+	Serial.print(TempMoy);
+	Serial.print('&');
+	Serial.println(TempObj);
 	delay(2000);
 }
