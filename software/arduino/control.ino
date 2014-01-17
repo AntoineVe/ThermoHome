@@ -8,6 +8,7 @@
 // Définition des ports I/O sur l'arduino
 const int Relais = 2;
 const int DS18B20 = 3;
+cosnt int Bleue = 4
 
 // Dans tout le programme, on travaille (un maximum) avec des entiers, donc en "centidegré Celsius"
 int TempObj = 2000; // Définie l'objectif de température
@@ -20,6 +21,7 @@ void setup(void) {
 	Serial.begin(9600);
 	pinMode(DS18B20, INPUT);
 	pinMode(Relais, OUTPUT);
+	pinMode(Bleue, OUTPUT);
 }
 
 float getTemp() {
@@ -75,12 +77,6 @@ void loop(void) {
 	if(TempMoy == 0) {
 		TempMoy = Temp; // Utile pour le premier calcul de moyenne
 	}
-	if(TempMoy < TempObj) { // Si la température est inférieure à l'objectif
-			digitalWrite(Relais, HIGH);
-		}
-		else {
-			digitalWrite(Relais, LOW);
-		}
 	if(t < 60) { // temps pour la moyenne (selon le delay())
 		Temperature[t] = Temp;
 		for(int i = 0; i < t; i = i + 1) { // Cette boucle permet de récupérer les valeurs
@@ -90,11 +86,23 @@ void loop(void) {
 	}
 	else {
 		t = 0; // Replace le compteur de la minuterie à zéro
+		if(TempMoy < TempObj) { // Si la température est inférieure à l'objectif
+			digitalWrite(Relais, HIGH);
+		}
+		else {
+			digitalWrite(Relais, LOW);
+		}
 	}
 	Serial.print(Temp);
 	Serial.print('&');
 	Serial.print(TempMoy);
 	Serial.print('&');
 	Serial.println(TempObj);
+	if(TempMoy < TempObj) {
+		digitalWrite(Bleue, HIGH);
+	}
+	else {
+		digitalWrite(Bleue, LOW);
+	}
 	delay(2000);
 }

@@ -3,7 +3,7 @@ import serial #Importe la bibliothèque de communication série
 import time #Importe la bibliothèque pour gérer le temps
 arduino = serial.Serial('/dev/ttyACM0', 9600) # ouvre le port série. Attention cela envoie un "reset" à l'arduino
 a = 0
-while(a < 10): #boucle pour la lecture
+while(a < 30): #boucle pour la lecture
     tempet = arduino.readline() #lit le port série
     while(len(tempet) != 16): #vérifie les données reçues. Normalement, il doit lire 16 caractères.
         tempet = arduino.readline() #Recommence la lecture s'il n'y a pas les 16 caractères.
@@ -15,5 +15,4 @@ while(a < 10): #boucle pour la lecture
     print('La température actuelle est de ' + (str(Temp)) + '°C.')
     print('La température moyenne est de ' + (str(TempMoy)) + '°C.')
     print('L\'objectif de température est de ' + (str(TempObj)) + '°C.')
-    time.sleep(5) #Attend 5 secondes avant de continuer
     a = a+1 #boucle

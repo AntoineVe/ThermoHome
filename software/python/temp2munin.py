@@ -25,7 +25,5 @@ def write2munin():
 		f.write("Temp.value " + str(TempMoy) + "\n")
 #		f.write("TempObj.value " + str(TempObj) + "\n")
 		f.close()
-		time.sleep(15) #Attend 5 secondes avant de continuer
-
 threading.Thread(target = write2munin).start()
 threading.Thread(target = httpserver).start()
