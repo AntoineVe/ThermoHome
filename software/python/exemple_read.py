@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import serial #Importe la bibliothèque de communication série
 import time #Importe la bibliothèque pour gérer le temps
 arduino = serial.Serial('/dev/ttyACM0', 9600) # ouvre le port série. Attention cela envoie un "reset" à l'arduino
