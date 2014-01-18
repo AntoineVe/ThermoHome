@@ -8,14 +8,16 @@
 // Définition des ports I/O sur l'arduino
 const int Relais = 2;
 const int DS18B20 = 3;
-cosnt int Bleue = 4
+const int Bleue = 4;
 
 // Dans tout le programme, on travaille (un maximum) avec des entiers, donc en "centidegré Celsius"
-int TempObj = 2000; // Définie l'objectif de température
+int TempObj = 2000; // Définie l'objectif de température par défaut
 int t = 0; // Variable utilisée pour le compteur-minuterie
 int Temperature[60]; // Tableau dans lequel sera enregistré les températures du capteur
-int TempMoy = 0; // Déclare la variable pour la température moyenne
+int TempMoy;// Déclare la variable pour la température moyenne
 OneWire	ds(DS18B20); // Déclare le capteur DS18B20
+String message;
+int serialin;
 
 void setup(void) {
 	Serial.begin(9600);
@@ -93,16 +95,22 @@ void loop(void) {
 			digitalWrite(Relais, LOW);
 		}
 	}
-	Serial.print(Temp);
-	Serial.print('&');
-	Serial.print(TempMoy);
-	Serial.print('&');
-	Serial.println(TempObj);
-	if(TempMoy < TempObj) {
-		digitalWrite(Bleue, HIGH);
-	}
-	else {
-		digitalWrite(Bleue, LOW);
+	if (Serial.available() > 0) {
+		serialin = Serial.read();
+		TempObj = 2100 - (((80 - serialin) * 100) / 2); // Petit algorithme pour le calcul de la température
+		// Départ de 21°, et modifie la valeur selon la valeur ASCII du caractère reçu, le nul correspondant
+		// à "P". "Monter" d'une lettre ajout 0,5°, "descendre" d'une lettre retranche 0,5°.
+		Serial.print(Temp);
+		Serial.print('&');
+		Serial.print(TempMoy);
+		Serial.print('&');
+		Serial.println(TempObj);
+		if(TempMoy < TempObj) {
+			digitalWrite(Bleue, HIGH);
+		}
+		else {
+			digitalWrite(Bleue, LOW);
+		}
 	}
 	delay(2000);
 }
