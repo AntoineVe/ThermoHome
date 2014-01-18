@@ -14,8 +14,6 @@ def httpserver():
 def write2munin():
 	while(True): #boucle pour la lecture
 		tempet = arduino.readline() #lit le port série
-		while(len(tempet) != 16): #vérifie les données reçues. Normalement, il doit lire 16 caractères.
-			tempet = arduino.readline() #Recommence la lecture s'il n'y a pas les 16 caractères.
 		tempet = tempet.decode("utf-8") #Transforme la chaine depuis 'bytes' vers 'utf-8' (python 3)
 		tempet = tempet.split('&') # Découpe la chaine sur les caractères '&'. 
 		Temp = int(tempet[0]) / 100
