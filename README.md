@@ -7,5 +7,6 @@ la chaudière. La partie programmation utilise un RaspberryPi
 
 Dépendances
 ===========
-- Python 3
-- PySerial pour Python 3
+- Python 3 (http://www.python.org/)
+- PySerial pour Python 3 (http://pyserial.sourceforge.net/)
+- Bottle pour Python (http://bottlepy.org/docs/dev/index.html)
