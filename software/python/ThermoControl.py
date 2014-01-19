@@ -39,7 +39,7 @@ while(True):
 	speak2arduino()
 	@route('/temp2munin.txt') #Sert le fichier pour munin
 	def temp2munin(temp=Temp):
-		return template('temp.value {{temp}}', temp=temp)
+		return template('Temp.value {{temp}}', temp=temp)
 	@route('/thermostat.html') #Page de monitoring et de programmation
 	def thermostat(temp=Temp, moy=TempMoy, obj=TempObj, prog=progjour):
 		heure = time.strftime("%H:%M")
