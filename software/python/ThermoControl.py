@@ -43,28 +43,41 @@ while(True):
 	@route('/thermostat.html') #Page de monitoring et de programmation
 	def thermostat(temp=Temp, moy=TempMoy, obj=TempObj, prog=progjour):
 		heure = time.strftime("%H:%M")
-		return template('''
-		<html>
-		<head>
-		<title>Gestion de la température</title>
-		<meta http-equiv="refresh" content="30;url=thermostat.html">
-		<body>
-		<h2>Température : {{temp}}</h2>
-		<h2>Moyenne : {{moy}}</h2>
-		<h2>Objectif : {{obj}}</h2>
-		<form action="/thermostat-prog.html" method="post">
-			Journée : <input name="prog" type="text" size="24" value="{{prog}}" />
-			<input valule="Programmer" type="submit" />
-		</form>
-		<div class="footer">Dernière mise à jour : {{heure}}</div>
-		</body>
-		</html>
-		''', temp=temp, moy=moy, obj=obj, heure=heure, prog=prog)
+		return template('thermostat', temp=temp, moy=moy, obj=obj, heure=heure, prog=prog)
 	@route('/thermostat-prog.html', method='POST') #Page d'attente post programmation. Réaffiche la page de monitoring au bout de 8 secondes (temps de mise à jour du programme et de l'arduino)
 	def do_thermostat():
 		global progjour
-		progjour = request.forms.get('prog')
-		return '''
+		def ogla(code):
+			code = float(code)
+			a = 80 + (code * 10 - 210) / 5
+			a = int(a)
+			return chr(a)
+		h0 = ogla(request.forms.get('prog_h0'))
+		h1 = ogla(request.forms.get('prog_h1'))
+		h2 = ogla(request.forms.get('prog_h2'))
+		h3 = ogla(request.forms.get('prog_h3'))
+		h4 = ogla(request.forms.get('prog_h4'))
+		h5 = ogla(request.forms.get('prog_h5'))
+		h6 = ogla(request.forms.get('prog_h6'))
+		h7 = ogla(request.forms.get('prog_h7'))
+		h8 = ogla(request.forms.get('prog_h8'))
+		h9 = ogla(request.forms.get('prog_h9'))
+		h10 = ogla(request.forms.get('prog_h10'))
+		h11 = ogla(request.forms.get('prog_h11'))
+		h12 = ogla(request.forms.get('prog_h12'))
+		h13 = ogla(request.forms.get('prog_h13'))
+		h14 = ogla(request.forms.get('prog_h14'))
+		h15 = ogla(request.forms.get('prog_h15'))
+		h16 = ogla(request.forms.get('prog_h16'))
+		h17 = ogla(request.forms.get('prog_h17'))
+		h18 = ogla(request.forms.get('prog_h18'))
+		h19 = ogla(request.forms.get('prog_h19'))
+		h20 = ogla(request.forms.get('prog_h20'))
+		h21 = ogla(request.forms.get('prog_h21'))
+		h22 = ogla(request.forms.get('prog_h22'))
+		h23 = ogla(request.forms.get('prog_h23'))
+		progjour = h0 + h1 + h2 + h3 + h4 + h5 + h6 + h7 + h8 + h9 + h10 + h11 + h12 + h13 + h14 + h15 + h16 + h17 + h18 + h19 + h20 + h21 + h22 + h23
+		return template('''
 		<html>
 		<head>
 		<title>Gestion de la température</title>
@@ -72,9 +85,10 @@ while(True):
 		</head>
 		<body>
 		<h1>Mise à jour...</h1>
+		<p>{{progjour}}</p>
 		</body>
 		</html>
-		'''
+		''', progjour=progjour)
 	if(webrun == 0):
 		threading.Thread(target = httpserver).start() #Lance le serveur web bottle dans un thread pour continuer le programme
 		webrun = 1 #Évite de relancer le thread
