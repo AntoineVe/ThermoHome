@@ -64,10 +64,10 @@
 		<td>Température actuelle&nbsp;:&nbsp;</td>
 		<td>{{temp}}&nbsp;°C</td>
 		</tr>
-		<tr>
+<!--		<tr>
 		<td>Température moyenne&nbsp;:&nbsp;</td>
 		<td>{{moy}}&nbsp;°C</td>
-		</tr>
+		</tr> -->
 	</table>
 	<p>L'objectif de température actuel est de {{obj}}&nbsp;°C.</p>
 
@@ -120,6 +120,6 @@
 		<br />
 		<input class="bouton" value="Programmer la journée" type="submit" />
 	</form>
-	<div class="footer">La durée prise en compte dans la température moyenne dépend du programme Arduino &mdash; Dernière mise à jour : {{heure}}</div>
+	<div class="footer">Dernière mise à jour : {{heure}}</div>
 </body>
 </html>
