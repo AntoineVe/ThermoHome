@@ -2,10 +2,9 @@
 import serial #Importe la bibliothèque de communication série
 import time #Importe la bibliothèque pour gérer le temps
 import threading #Multithreading
-from bottle import route, run, template, get, post, request
+import bottle #Serveur web Bottle
 
 webrun = 0 
-it = 0
 ARDUINO = serial.Serial('/dev/ttyACM0', 9600) # ouvre le port série. Attention cela envoie un "reset" à l'arduino
 
 progjour = "LJJJJLNNNNNNNNNNNNNOPONL" #Journée par défaut (cf calcul de température par l'arduino)
@@ -17,6 +16,7 @@ progjour = "LJJJJLNNNNNNNNNNNNNOPONL" #Journée par défaut (cf calcul de tempé
 
 def speak2arduino(): #Fonction de communication avec l'arduino
 	time.sleep(5) #Les 5 secondes permettent de s'assurer que l'arduino est disponible
+	ARDUINO.flush() #Vide le tampon de l'arduino
 	global Temp
 	global TempMoy
 	global TempObj
@@ -33,18 +33,18 @@ def speak2arduino(): #Fonction de communication avec l'arduino
 	TempObj = int(releves[2]) / 100
 
 def httpserver():
-	run(host='0.0.0.0', port='8000', debug=True) #commande lançant le serveur bottle
+	bottle.run(host='0.0.0.0', port='8000', debug=True) #commande lançant le serveur bottle
 
 while(True):
 	speak2arduino()
-	@route('/temp2munin.txt') #Sert le fichier pour munin
+	@bottle.route('/temp2munin.txt') #Sert le fichier pour munin
 	def temp2munin(temp=Temp):
-		return template('Temp.value {{temp}}', temp=temp)
-	@route('/thermostat.html') #Page de monitoring et de programmation
+		return bottle.template('Temp.value {{temp}}', temp=temp)
+	@bottle.route('/thermostat.html') #Page de monitoring et de programmation
 	def thermostat(temp=Temp, moy=TempMoy, obj=TempObj, prog=progjour):
 		heure = time.strftime("%H:%M")
-		return template('thermostat', temp=temp, moy=moy, obj=obj, heure=heure, prog=prog)
-	@route('/thermostat-prog.html', method='POST') #Page d'attente post programmation. Réaffiche la page de monitoring au bout de 8 secondes (temps de mise à jour du programme et de l'arduino)
+		return bottle.template('thermostat', temp=temp, moy=moy, obj=obj, heure=heure, prog=prog)
+	@bottle.route('/thermostat-prog.html', method='POST') #Page d'attente post programmation. Réaffiche la page de monitoring au bout de 8 secondes (temps de mise à jour du programme et de l'arduino)
 	def do_thermostat():
 		global progjour
 		def ogla(code):
@@ -52,32 +52,32 @@ while(True):
 			a = 80 + (code * 10 - 210) / 5
 			a = int(a)
 			return chr(a)
-		h0 = ogla(request.forms.get('prog_h0'))
-		h1 = ogla(request.forms.get('prog_h1'))
-		h2 = ogla(request.forms.get('prog_h2'))
-		h3 = ogla(request.forms.get('prog_h3'))
-		h4 = ogla(request.forms.get('prog_h4'))
-		h5 = ogla(request.forms.get('prog_h5'))
-		h6 = ogla(request.forms.get('prog_h6'))
-		h7 = ogla(request.forms.get('prog_h7'))
-		h8 = ogla(request.forms.get('prog_h8'))
-		h9 = ogla(request.forms.get('prog_h9'))
-		h10 = ogla(request.forms.get('prog_h10'))
-		h11 = ogla(request.forms.get('prog_h11'))
-		h12 = ogla(request.forms.get('prog_h12'))
-		h13 = ogla(request.forms.get('prog_h13'))
-		h14 = ogla(request.forms.get('prog_h14'))
-		h15 = ogla(request.forms.get('prog_h15'))
-		h16 = ogla(request.forms.get('prog_h16'))
-		h17 = ogla(request.forms.get('prog_h17'))
-		h18 = ogla(request.forms.get('prog_h18'))
-		h19 = ogla(request.forms.get('prog_h19'))
-		h20 = ogla(request.forms.get('prog_h20'))
-		h21 = ogla(request.forms.get('prog_h21'))
-		h22 = ogla(request.forms.get('prog_h22'))
-		h23 = ogla(request.forms.get('prog_h23'))
+		h0 = ogla(bottle.request.forms.get('prog_h0'))
+		h1 = ogla(bottle.request.forms.get('prog_h1'))
+		h2 = ogla(bottle.request.forms.get('prog_h2'))
+		h3 = ogla(bottle.request.forms.get('prog_h3'))
+		h4 = ogla(bottle.request.forms.get('prog_h4'))
+		h5 = ogla(bottle.request.forms.get('prog_h5'))
+		h6 = ogla(bottle.request.forms.get('prog_h6'))
+		h7 = ogla(bottle.request.forms.get('prog_h7'))
+		h8 = ogla(bottle.request.forms.get('prog_h8'))
+		h9 = ogla(bottle.request.forms.get('prog_h9'))
+		h10 = ogla(bottle.request.forms.get('prog_h10'))
+		h11 = ogla(bottle.request.forms.get('prog_h11'))
+		h12 = ogla(bottle.request.forms.get('prog_h12'))
+		h13 = ogla(bottle.request.forms.get('prog_h13'))
+		h14 = ogla(bottle.request.forms.get('prog_h14'))
+		h15 = ogla(bottle.request.forms.get('prog_h15'))
+		h16 = ogla(bottle.request.forms.get('prog_h16'))
+		h17 = ogla(bottle.request.forms.get('prog_h17'))
+		h18 = ogla(bottle.request.forms.get('prog_h18'))
+		h19 = ogla(bottle.request.forms.get('prog_h19'))
+		h20 = ogla(bottle.request.forms.get('prog_h20'))
+		h21 = ogla(bottle.request.forms.get('prog_h21'))
+		h22 = ogla(bottle.request.forms.get('prog_h22'))
+		h23 = ogla(bottle.request.forms.get('prog_h23'))
 		progjour = h0 + h1 + h2 + h3 + h4 + h5 + h6 + h7 + h8 + h9 + h10 + h11 + h12 + h13 + h14 + h15 + h16 + h17 + h18 + h19 + h20 + h21 + h22 + h23
-		return template('''
+		return bottle.template('''
 		<html>
 		<head>
 		<title>Gestion de la température</title>
