@@ -3,6 +3,14 @@ import serial #Importe la bibliothèque de communication série
 import time #Importe la bibliothèque pour gérer le temps
 import threading #Multithreading
 import bottle #Serveur web Bottle
+import argparse #Parser d'arguments
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--module", nargs="*", default="none", help="Liste de modules à ajouter")
+parser.add_argument("--port", nargs=1, default="/dev/ttyACM0", help="Port de l'Arduino (/dev/ttyACM0)")
+parser.add_argument("--web-port", nargs=1, default="8000", help="Port pour le serveur web")
+
+args = parser.parse_args()
 
 webrun = 0 
 ARDUINO = serial.Serial('/dev/ttyACM0', 9600) # ouvre le port série. Attention cela envoie un "reset" à l'arduino
@@ -92,3 +100,5 @@ while(True):
 	if(webrun == 0):
 		threading.Thread(target = httpserver).start() #Lance le serveur web bottle dans un thread pour continuer le programme
 		webrun = 1 #Évite de relancer le thread
+
+#vim tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
