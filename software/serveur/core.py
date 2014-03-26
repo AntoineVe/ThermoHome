@@ -17,7 +17,7 @@ args = parser.parse_args()
 webrun = 0 
 ARDUINO = serial.Serial(args.port, 9600) # ouvre le port série. Attention cela envoie un "reset" à l'arduino
 
-progjour = "LJJJJLNNNNNNNNNNNNNOPONL" #Journée par défaut (cf calcul de température par l'arduino)
+progjour = "JJJJJJNNNNNNNNNNNNNNNNJJ" #Journée par défaut (cf calcul de température par l'arduino)
 
 # Pour rappel :
 # TempObj = 2100 - (((80 - serialin) * 100) / 2); // Petit algorithme pour le calcul de la température
