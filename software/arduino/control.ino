@@ -105,12 +105,12 @@ void loop(void) {
 		Serial.print(TempMoy);
 		Serial.print('&');
 		Serial.println(TempObj);
-		if(TempMoy < TempObj) {
-			digitalWrite(Bleue, HIGH);
-		}
-		else {
-			digitalWrite(Bleue, LOW);
-		}
+	}
+	if(TempMoy < TempObj) {
+		digitalWrite(Bleue, HIGH);
+	}
+	else {
+		digitalWrite(Bleue, LOW);
 	}
 	delay(2000);
 }
