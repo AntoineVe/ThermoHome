@@ -2,60 +2,7 @@
 <head>
 	<title>Gestion de la température</title>
 	<meta http-equiv="refresh" content="60;url=thermostat.html">
-	<style type="text/css">
-		body {
-			text-align: center;
-			font-family: "Georgia", serif;
-			background-color: #FCF6CF;
-		}
-		h1 {
-			font-size: 250%;
-		}
-		table {
-			margin-left: auto;
-			margin-right: auto;
-			border: 0px;
-			font-size: 150%;
-		}
-		p {
-			font-size: 150%;
-		}
-		.footer {
-			font-size: 90%;
-			position: absolute;
-			bottom: 0px;
-			right: 0px;
-			height: 1.5em;
-		}
-		.prog {
-			font-size: 150%;
-			border-width: 2px;
-			border-style: solid;
-		}
-		.prog td {
-			border-width: 1px;
-			border-style: solid;
-			text-align: center;
-		}
-		input {
-			font-family: "Courier", monospace;
-			font-weight: bold;
-			font-size: 90%;
-			background-color: #FEF5CA;
-			border: none;
-		}
-		.bouton {
-			font-family: "Georgia", serif;
-			font-size: 200%;
-			background-color: #EEF3E2;
-			border: 2px solid black;
-		}
-		.bouton:hover {
-			background-color: #D2691E;
-			border: 2px solid darkred;
-
-
-	</style>
+	<link type="text/css" href="style-solarized.css" rel="stylesheet">
 </head>
 <body>
 	<h1>Températures</h1>
