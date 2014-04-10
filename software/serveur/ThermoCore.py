@@ -13,9 +13,10 @@ parser.add_argument("--temp-only", dest="temponly", action="store", type=int, na
 
 args = parser.parse_args()
 
-
 webrun = 0 
+
 ARDUINO = serial.Serial('/dev/ttyUSB0', 9600) # ouvre le port série. Attention cela envoie un "reset" à l'arduino
+time.sleep(5) #Les 5 secondes permettent de s'assurer que l'arduino est disponible
 
 progjour = "JJJJJJNNNNNNNNNNNNNNNNJJ" #Journée par défaut (cf calcul de température par l'arduino)
 
@@ -25,7 +26,6 @@ progjour = "JJJJJJNNNNNNNNNNNNNNNNJJ" #Journée par défaut (cf calcul de tempé
 # à "P". "Monter" d'une lettre ajout 0,5°, "descendre" d'une lettre retranche 0,5°.
 
 def speak2arduino(): #Fonction de communication avec l'arduino
-    time.sleep(5) #Les 5 secondes permettent de s'assurer que l'arduino est disponible
     global Temp
     global TempMoy
     global TempObj
@@ -44,7 +44,7 @@ def speak2arduino(): #Fonction de communication avec l'arduino
     Temp = int(releves[0]) / 100
     TempMoy = int(releves[1]) / 100
     TempObj = int(releves[2]) / 100
-    del heure #Libère un peu de mêmoire...
+    del heure #Libère un peu de mémoire...
     del obj
     del releves
 
