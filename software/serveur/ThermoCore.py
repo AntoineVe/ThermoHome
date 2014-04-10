@@ -49,10 +49,13 @@ if(args.temponly == 1):
 
 speak2arduino() #Lance une première fois pour initialiser la variable Temp
 
-@bottle.route('/temp2munin.txt') #Sert le fichier pour munin
+@bottle.get('/temp2munin.txt') #Sert le fichier pour munin
 def temp2munin():
     speak2arduino()
     return bottle.template('Temp.value {{temp}}', temp=Temp)
+@bottle.get('/<filename:re:.*\.css>')
+def stylesheets(filename):
+    return bottle.static_file(filename, root='static')
 @bottle.route('/thermostat.html') #Page de monitoring et de programmation
 def thermostat():
     heure = time.strftime("%H:%M")
@@ -91,18 +94,8 @@ def do_thermostat():
     h22 = ogla(bottle.request.forms.get('prog_h22'))
     h23 = ogla(bottle.request.forms.get('prog_h23'))
     progjour = h0 + h1 + h2 + h3 + h4 + h5 + h6 + h7 + h8 + h9 + h10 + h11 + h12 + h13 + h14 + h15 + h16 + h17 + h18 + h19 + h20 + h21 + h22 + h23
-    return bottle.template('''
-    <html>
-    <head>
-    <title>Gestion de la température</title>
-        <meta http-equiv="refresh" content="8;url=thermostat.html">
-    </head>
-    <body>
-    <h1>Mise à jour...</h1>
-    <p>{{progjour}}</p>
-    </body>
-    </html>''', progjour=progjour)
+    return bottle.template('thermostat_update.tpl', progjour=progjour)
 
-bottle.run(host='0.0.0.0', port=args.webport, debug=False) #commande lançant le serveur bottle
+bottle.run(host='0.0.0.0', port=args.webport, debug=True) #commande lançant le serveur bottle
 
 #vim tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
