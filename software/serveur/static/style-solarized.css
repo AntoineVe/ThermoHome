@@ -1,0 +1,59 @@
+/* Basé sur http://ethanschoonover.com/solarized */
+body {
+	text-align: center;
+	font-family: sans-serif;
+	background-color: #fdf6e3;
+	color: #586e75;
+}
+h1 {
+	font-size: 250%;
+	color: #b58900
+}
+table {
+	margin-left: auto;
+	margin-right: auto;
+	border: 0px;
+	font-size: 150%;
+	font-weight: lighter;
+}
+p {
+	font-size: 150%;
+	font-weight: lighter;
+}
+.footer {
+	font-size: 90%;
+	font-weight: lighter;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	height: 1.5em;
+}
+.prog {
+	font-size: 150%;
+	border-width: 2px;
+	border-style: solid;
+}
+.prog td {
+	border-width: 1px;
+	border-style: solid;
+	text-align: center;
+}
+input {
+	font-family: "Courier", monospace;
+	color: #586e75;
+	font-weight: bold;
+	font-size: 90%;
+	background-color: #fdf6e3;
+	border: none;
+}
+.bouton {
+	font-family: sans-serif;
+	font-size: 200%;
+	background-color: #eee8d5;
+	border: 2px solid #268bd2;
+}
+.bouton:hover {
+	background-color: #073642;
+	border: 2px solid #268bd2;
+}
+
