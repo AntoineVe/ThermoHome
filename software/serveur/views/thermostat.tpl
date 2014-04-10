@@ -64,10 +64,6 @@
 		<td>Température actuelle&nbsp;:&nbsp;</td>
 		<td>{{temp}}&nbsp;°C</td>
 		</tr>
-<!--		<tr>
-		<td>Température moyenne&nbsp;:&nbsp;</td>
-		<td>{{moy}}&nbsp;°C</td>
-		</tr> -->
 	</table>
 	<p>L'objectif de température actuel est de {{obj}}&nbsp;°C.</p>
 
