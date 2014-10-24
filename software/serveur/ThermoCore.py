@@ -7,12 +7,14 @@ import sqlite3 #Importe la gestion des bases sqlite3
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--module", dest="modules", nargs="*", default="none", help="Liste de modules à ajouter")
-parser.add_argument("--base", dest="base", nargs=1, default="./thermo.db", type=str, help="Nom de la base sqlite")
+parser.add_argument("--base", dest="db", nargs=1, default="./thermo.db", type=str, help="Nom de la base sqlite")
 parser.add_argument("--port", dest="port", nargs=1, default="/dev/ttyACM0", type=str, help="Port de l'Arduino (/dev/ttyACM0)")
 parser.add_argument("--web-port", dest="webport", nargs=1, default="8000", type=int, help="Port pour le serveur web")
 parser.add_argument("--temp-only", dest="temponly", action="store", type=int, nargs="?", const=1, help="Affiche la température relevée et quitte")
 
 args = parser.parse_args()
+
+db = "./thermo.db"
 
 ARDUINO = serial.Serial('/dev/ttyUSB0', 9600) # ouvre le port série. Attention cela envoie un "reset" à l'arduino
 time.sleep(5) #Les 5 secondes permettent de s'assurer que l'arduino est disponible
@@ -55,7 +57,7 @@ def checkdb(date):
     c = conn.cursor()
     c.execute("SELECT progjour FROM requested WHERE date = ?", (date,))
     dbprog = c.fetchone()
-    if dbprog[0] != "":
+    if dbprog:
         progjour = dbprog[0]
     conn.close()
     return progjour
