@@ -54,7 +54,7 @@ def checkdb(date):
     conn = sqlite3.connect(db)
     c = conn.cursor()
     c.execute("SELECT progjour FROM requested WHERE date = ?", (date,))
-    dbprog = c.fectchone())
+    dbprog = c.fetchone()
     if dbprog[0] != "":
         progjour = dbprog[0]
     conn.close()
