@@ -10,3 +10,4 @@ Dépendances
 - Python 3 (http://www.python.org/)
 - PySerial pour Python 3 (http://pyserial.sourceforge.net/)
 - Bottle pour Python (http://bottlepy.org/docs/dev/index.html)
+- python-sqlite3
