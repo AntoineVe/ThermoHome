@@ -19,7 +19,13 @@ db = "./thermo.db"
 ARDUINO = serial.Serial('/dev/ttyUSB0', 9600) # ouvre le port série. Attention cela envoie un "reset" à l'arduino
 time.sleep(5) #Les 5 secondes permettent de s'assurer que l'arduino est disponible
 
-progjour = "JJJJJJNNNNNNNNNNNNNNNNJJ" #Journée par défaut (cf calcul de température par l'arduino)
+defprogjour = "HHHHHHHHPPNNNNNNNNNPPPNL" #Journée par défaut (cf calcul de température par l'arduino)
+progjour = defprogjour
+
+#H 17  L 19  P 21
+#I     M
+#J 18  N 20
+#K     O 
 
 # Pour rappel :
 # TempObj = 2100 - (((80 - serialin) * 100) / 2); // Petit algorithme pour le calcul de la température
@@ -51,25 +57,37 @@ if(args.temponly == 1):
     quit()
 
 def checkdb(date):
+    global defprogjour
     global progjour
     global db
     conn = sqlite3.connect(db)
     c = conn.cursor()
     c.execute("SELECT progjour FROM requested WHERE date = ?", (date,))
     dbprog = c.fetchone()
+    progjour = defprogjour
     if dbprog:
         progjour = dbprog[0]
     conn.close()
     return progjour
 
+def recorddb(temp):
+    global db
+    datetime = time.strftime("%d-%m-%Y_%H-%M")
+    record = (datetime, temp)
+    conn = sqlite3.connect(db)
+    c = conn.cursor()
+    c.execute("INSERT OR REPLACE INTO recorded VALUES(?,?)", (record))
+    conn.commit()
+    conn.close()
+
 speak2arduino() #Lance une première fois pour initialiser la variable Temp
 
-@bottle.get('/temp2munin.txt') #Sert le fichier pour munin
-def temp2munin():
+@bottle.get('/getTemp.txt')
+def getTemp():
     today = time.strftime("%d-%m-%Y")
-    checkdb(today)
     speak2arduino()
-    return bottle.template('Temp.value {{temp}}', temp=Temp)
+    recorddb(Temp)
+    return bottle.template('{{temp}}', temp=Temp)
 @bottle.get('/<filename:re:.*\.css>')
 def stylesheets(filename):
     return bottle.static_file(filename, root='static')
