@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Gestion de la température</title>
-	<meta http-equiv="refresh" content="8;url=thermostat.html">
+	<meta http-equiv="refresh" content="8;url=thermostat.html?date={{date}}">
 	<link type="text/css" href="style-solarized.css" rel="stylesheet">
 	</head>
 	<body>

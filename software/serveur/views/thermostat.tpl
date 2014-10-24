@@ -1,8 +1,10 @@
+<!-- pikaday is from https://github.com/dbushell/Pikaday -->
 <html>
 <head>
 	<title>Gestion de la température</title>
-	<meta http-equiv="refresh" content="60;url=thermostat.html">
-	<link type="text/css" href="style-solarized.css" rel="stylesheet">
+	<meta http-equiv="refresh" content="60;url=thermostat.html?date={{date}}" />
+	<link type="text/css" href="style-solarized.css" rel="stylesheet" />
+	<link type="text/css" href="pikaday.css" rel="stylesheet" />
 </head>
 <body>
 	<h1>Températures</h1>
@@ -13,8 +15,9 @@
 		</tr>
 	</table>
 	<p>L'objectif de température actuel est de {{obj}}&nbsp;°C.</p>
-
-	<h1>Programmation</h1>
+	<h1>Programmation du {{date}}</h1>
+	<button id="datepicker">Choisir la date</button>
+	<br /><br />
 	<form action="/thermostat-prog.html" method="post">
 		<table class="prog">
         %def algo(code):
@@ -61,8 +64,30 @@
             </tr>
 		</table>
 		<br />
+		<input name="date" type="hidden" value="{{date}}" />
 		<input class="bouton" value="Programmer la journée" type="submit" />
 	</form>
+	<script src="moment.min.js"></script>
+	<script src="pikaday.js"></script>
+	<script>
+
+     // You can get and set dates with moment objects
+     var picker = new Pikaday(
+     {
+         field: document.getElementById('datepicker'),
+         firstDay: 0,
+         minDate: new Date('2014-01-01'),
+         maxDate: new Date('2016-12-31'),
+         yearRange: [2014,216],
+         onSelect: function() {
+             var date = this.getMoment().format('DD-MM-YYYY');
+             window.location = 'thermostat.html?date=' + date;
+         }
+     });
+    
+     //picker.setMoment(moment().dayOfYear(366));
+    
+    </script>
 	<div class="footer">Dernière mise à jour : {{heure}}</div>
 </body>
 </html>

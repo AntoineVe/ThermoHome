@@ -56,11 +56,17 @@ def temp2munin():
 @bottle.get('/<filename:re:.*\.css>')
 def stylesheets(filename):
     return bottle.static_file(filename, root='static')
+@bottle.get('/<filename:re:.*\.js>')
+def stylesheets(filename):
+    return bottle.static_file(filename, root='static')
 @bottle.route('/thermostat.html') #Page de monitoring et de programmation
 def thermostat():
+    date = bottle.request.query.date
+    if(date == ""):
+        date = time.strftime("%d-%m-%Y")
     heure = time.strftime("%H:%M")
     speak2arduino()
-    return bottle.template('thermostat', temp=Temp, obj=TempObj, heure=heure, prog=progjour)
+    return bottle.template('thermostat', temp=Temp, obj=TempObj, heure=heure, prog=progjour, date=date)
 @bottle.route('/thermostat-prog.html', method='POST') #Page d'attente post programmation. Réaffiche la page de monitoring au bout de 8 secondes (temps de mise à jour du programme et de l'arduino)
 def do_thermostat():
     global progjour
@@ -94,7 +100,8 @@ def do_thermostat():
     h22 = ogla(bottle.request.forms.get('prog_h22'))
     h23 = ogla(bottle.request.forms.get('prog_h23'))
     progjour = h0 + h1 + h2 + h3 + h4 + h5 + h6 + h7 + h8 + h9 + h10 + h11 + h12 + h13 + h14 + h15 + h16 + h17 + h18 + h19 + h20 + h21 + h22 + h23
-    return bottle.template('thermostat_update.tpl', progjour=progjour)
+    date = bottle.request.forms.get('date')
+    return bottle.template('thermostat_update.tpl', progjour=progjour, date=date)
 
 bottle.run(host='0.0.0.0', port=args.webport, debug=True) #commande lançant le serveur bottle
 
