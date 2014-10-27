@@ -67,6 +67,60 @@
 		<input name="date" type="hidden" value="{{date}}" />
 		<input class="bouton" value="Programmer la journée" type="submit" />
 	</form>
+	<h1>Historique de cette journée</h1>
+	% t0 = abs((h0 * 10) - 300)
+	% t1 = abs((h1 * 10) - 300)
+	% t2 = abs((h2 * 10) - 300)
+	% t3 = abs((h3 * 10) - 300)
+	% t4 = abs((h4 * 10) - 300)
+	% t5 = abs((h5 * 10) - 300)
+	% t6 = abs((h6 * 10) - 300)
+	% t7 = abs((h7 * 10) - 300)
+	% t8 = abs((h8 * 10) - 300)
+	% t9 = abs((h9 * 10) - 300)
+	% t10 = abs((h10 * 10) - 300)
+	% t11 = abs((h11 * 10) - 300)
+	% t12 = abs((h12 * 10) - 300)
+	% t13 = abs((h13 * 10) - 300)
+	% t14 = abs((h14 * 10) - 300)
+	% t15 = abs((h15 * 10) - 300)
+	% t16 = abs((h16 * 10) - 300)
+	% t17 = abs((h17 * 10) - 300)
+	% t18 = abs((h18 * 10) - 300)
+	% t19 = abs((h19 * 10) - 300)
+	% t20 = abs((h20 * 10) - 300)
+	% t21 = abs((h21 * 10) - 300)
+	% t22 = abs((h22 * 10) - 300)
+	% t23 = abs((h23 * 10) - 300)
+	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="720" height="220">
+		<line x1="0" y1="200" x2="720" y2="200" stroke-width="2" stroke="rgb(38,139,210)" />
+		<line x1="0" y1="200" x2="0" y2="0" stroke-width="2" stroke="rgb(38,139,210)" />
+		<polyline points="0,200 0,{{t0}} 30,{{t0}} 30,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="30,200 30,{{t1}} 60,{{t1}} 60,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="60,200 60,{{t2}} 90,{{t2}} 90,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="90,200 90,{{t3}} 120,{{t3}} 120,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="120,200 120,{{t4}} 150,{{t4}} 150,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="150,200 150,{{t5}} 180,{{t5}} 180,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="180,200 180,{{t6}} 210,{{t6}} 210,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="210,200 210,{{t7}} 240,{{t7}} 240,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="240,200 240,{{t8}} 270,{{t8}} 270,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="270,200 270,{{t9}} 300,{{t9}} 300,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="300,200 300,{{t10}} 330,{{t10}} 330,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="330,200 330,{{t11}} 360,{{t11}} 360,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="360,200 360,{{t12}} 390,{{t12}} 390,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="390,200 390,{{t13}} 420,{{t13}} 420,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="420,200 420,{{t14}} 450,{{t14}} 450,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="450,200 450,{{t15}} 480,{{t15}} 480,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="480,200 480,{{t16}} 510,{{t16}} 510,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="510,200 510,{{t17}} 540,{{t17}} 540,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="540,200 540,{{t18}} 570,{{t18}} 570,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="570,200 570,{{t19}} 600,{{t19}} 600,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="600,200 600,{{t20}} 630,{{t20}} 630,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="630,200 630,{{t21}} 660,{{t21}} 660,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="660,200 660,{{t22}} 690,{{t22}} 690,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+		<polyline points="690,200 690,{{t23}} 720,{{t23}} 720,200" fill="rgb(133,153,0)" stroke-width="1" stroke="rgb(0,43,54)" />
+	% 
+	</svg>
 	<script src="moment.min.js"></script>
 	<script src="pikaday.js"></script>
 	<script>
