@@ -79,6 +79,37 @@ def recorddb(temp):
     conn.commit()
     conn.close()
 
+def courbe(date):
+    global db
+    svg_courbe = ""
+    date = date + '%'
+    conn = sqlite3.connect(db)
+    c = conn.cursor()
+    c.execute("SELECT date FROM recorded WHERE date LIKE ? ORDER BY date ASC", (date,))
+    timepoint = c.fetchall()
+    delai = abs(int([timepoint[0] for timepoint in timepoint][0].split('-')[3])-int([timepoint[0] for timepoint in timepoint][1].split('-')[3]))
+    timepoint = [timepoint[0] for timepoint in timepoint]
+    for horloge in timepoint:
+        jour = horloge.split('_')[0]
+        heure = int(horloge.split('_')[1].split('-')[0])
+        minute = int(horloge.split('_')[1].split('-')[1])
+        heureminute = minute + heure*60
+        c.execute("SELECT recjour FROM recorded WHERE date = ?", (horloge,))
+        start_temp = c.fetchone()[0]
+        start_time = heureminute
+        end_time = start_time + delai
+        end_heure = end_time // 60
+        end_minute = end_time % 60
+        end_heure = str(end_heure).zfill(2)
+        end_minute = str(end_minute).zfill(2)
+        end_horloge = jour + '_' + end_heure + '-' + end_minute
+        c.execute("SELECT recjour FROM recorded WHERE date = ?", (end_horloge,))
+        end_temp = c.fetchone()
+        if end_temp:
+            end_temp = end_temp[0]
+            svg_courbe += ('<path d="M' + str(start_time / 2) + ',' + str(abs(start_temp*10 - 300)) + ' C' + str((start_time + end_time) / 4) + ',' + str(abs(start_temp*10 - 300)) + ' ' + str((start_time + end_time) / 4) + ',' + str(abs(end_temp*10 - 300)) + ' ' + str(end_time / 2) + ',' + str(abs(end_temp*10 - 300)) + '" fill="none" stroke-width="2.5" stroke="#073642" />')
+    return svg_courbe
+
 checkdb(time.strftime("%d-%m-%Y")) #Vérifie la base de données au démarrage
 speak2arduino() #Lance une première fois pour initialiser la variable Temp
 
@@ -103,7 +134,8 @@ def thermostat():
     checkdb(date)
     heure = time.strftime("%H:%M")
     speak2arduino()
-    return bottle.template('thermostat', temp=Temp, obj=TempObj, heure=heure, prog=progjour, date=date)
+    svg_courbe = courbe(date)
+    return bottle.template('thermostat', temp=Temp, obj=TempObj, heure=heure, prog=progjour, date=date, courbe=svg_courbe)
 @bottle.route('/thermostat-prog.html', method='POST') #Page d'attente post programmation. Réaffiche la page de monitoring au bout de 8 secondes (temps de mise à jour du programme et de l'arduino)
 def do_thermostat():
     global progjour
