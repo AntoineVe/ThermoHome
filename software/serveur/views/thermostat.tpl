@@ -92,34 +92,66 @@
 	% t21 = abs((h21 * 10) - 300)
 	% t22 = abs((h22 * 10) - 300)
 	% t23 = abs((h23 * 10) - 300)
-	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="720" height="220">
+	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="780" height="220">
 		<line x1="0" y1="200" x2="720" y2="200" stroke-width="2" stroke="rgb(38,139,210)" />
 		<line x1="0" y1="200" x2="0" y2="0" stroke-width="2" stroke="rgb(38,139,210)" />
-		<polyline points="0,200 0,{{t0}} 30,{{t0}} 30,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="30,200 30,{{t1}} 60,{{t1}} 60,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="60,200 60,{{t2}} 90,{{t2}} 90,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="90,200 90,{{t3}} 120,{{t3}} 120,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="120,200 120,{{t4}} 150,{{t4}} 150,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="150,200 150,{{t5}} 180,{{t5}} 180,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="180,200 180,{{t6}} 210,{{t6}} 210,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="210,200 210,{{t7}} 240,{{t7}} 240,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="240,200 240,{{t8}} 270,{{t8}} 270,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="270,200 270,{{t9}} 300,{{t9}} 300,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="300,200 300,{{t10}} 330,{{t10}} 330,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="330,200 330,{{t11}} 360,{{t11}} 360,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="360,200 360,{{t12}} 390,{{t12}} 390,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="390,200 390,{{t13}} 420,{{t13}} 420,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="420,200 420,{{t14}} 450,{{t14}} 450,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="450,200 450,{{t15}} 480,{{t15}} 480,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="480,200 480,{{t16}} 510,{{t16}} 510,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="510,200 510,{{t17}} 540,{{t17}} 540,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="540,200 540,{{t18}} 570,{{t18}} 570,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="570,200 570,{{t19}} 600,{{t19}} 600,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="600,200 600,{{t20}} 630,{{t20}} 630,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="630,200 630,{{t21}} 660,{{t21}} 660,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="660,200 660,{{t22}} 690,{{t22}} 690,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
-		<polyline points="690,200 690,{{t23}} 720,{{t23}} 720,200" fill="#93a1a1" stroke-width="1" stroke="#586e75" />
+		<polyline points="0,200 0,{{t0}} 30,{{t0}} 30,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="30,200 30,{{t1}} 60,{{t1}} 60,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="60,200 60,{{t2}} 90,{{t2}} 90,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="90,200 90,{{t3}} 120,{{t3}} 120,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="120,200 120,{{t4}} 150,{{t4}} 150,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="150,200 150,{{t5}} 180,{{t5}} 180,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="180,200 180,{{t6}} 210,{{t6}} 210,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="210,200 210,{{t7}} 240,{{t7}} 240,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="240,200 240,{{t8}} 270,{{t8}} 270,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="270,200 270,{{t9}} 300,{{t9}} 300,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="300,200 300,{{t10}} 330,{{t10}} 330,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="330,200 330,{{t11}} 360,{{t11}} 360,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="360,200 360,{{t12}} 390,{{t12}} 390,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="390,200 390,{{t13}} 420,{{t13}} 420,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="420,200 420,{{t14}} 450,{{t14}} 450,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="450,200 450,{{t15}} 480,{{t15}} 480,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="480,200 480,{{t16}} 510,{{t16}} 510,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="510,200 510,{{t17}} 540,{{t17}} 540,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="540,200 540,{{t18}} 570,{{t18}} 570,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="570,200 570,{{t19}} 600,{{t19}} 600,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="600,200 600,{{t20}} 630,{{t20}} 630,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="630,200 630,{{t21}} 660,{{t21}} 660,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="660,200 660,{{t22}} 690,{{t22}} 690,200" fill="#93a1a1" stroke-width="0" />
+		<polyline points="690,200 690,{{t23}} 720,{{t23}} 720,200" fill="#93a1a1" stroke-width="0" />
 		{{!courbe}}
+		<line x1="0" y1="160" x2="722" y2="160" stroke-width="0.5" stroke="#073642" /><text x="725" y="165" font-size="14px" fill="#586e75">14°C</text>
+		<line x1="0" y1="140" x2="722" y2="140" stroke-width="0.5" stroke="#073642" /><text x="725" y="145" font-size="14px" fill="#586e75">16°C</text>
+		<line x1="0" y1="120" x2="722" y2="120" stroke-width="0.5" stroke="#073642" /><text x="725" y="125" font-size="14px" fill="#586e75">18°C</text>
+		<line x1="0" y1="100" x2="722" y2="100" stroke-width="0.5" stroke="#073642" /><text x="725" y="105" font-size="16px" fill="#586e75">20°C</text>
+		<line x1="0" y1="80" x2="722" y2="80" stroke-width="0.5" stroke="#073642" /><text x="725" y="85" font-size="14px" fill="#586e75">22°C</text>
+		<line x1="0" y1="60" x2="722" y2="60" stroke-width="0.5" stroke="#073642" /><text x="725" y="65" font-size="14px" fill="#586e75">24°C</text>
+		<line x1="0" y1="40" x2="722" y2="40" stroke-width="0.5" stroke="#073642" /><text x="725" y="45" font-size="14px" fill="#586e75">26°C</text>
+
+		<line x1="30" y1="200" x2="30" y2="15"  stroke-width="0.5" stroke="#073642" />
+		<line x1="60" y1="200" x2="60" y2="15"  stroke-width="0.5" stroke="#073642" /><text x=60 y=12 font-size="12px" fill="#586e75" style="text-anchor: middle">2h</text>
+		<line x1="90" y1="200" x2="90" y2="15"  stroke-width="0.5" stroke="#073642" />
+		<line x1="120" y1="200" x2="120" y2="15"  stroke-width="0.5" stroke="#073642" /><text x=120 y=12 font-size="12px" fill="#586e75" style="text-anchor: middle">4h</text>
+		<line x1="150" y1="200" x2="150" y2="15"  stroke-width="0.5" stroke="#073642" />
+		<line x1="180" y1="200" x2="180" y2="15"  stroke-width="0.5" stroke="#073642" /><text x=180 y=12 font-size="12px" fill="#586e75" style="text-anchor: middle">6h</text>
+		<line x1="210" y1="200" x2="210" y2="15"  stroke-width="0.5" stroke="#073642" />
+		<line x1="240" y1="200" x2="240" y2="15"  stroke-width="0.5" stroke="#073642" /><text x=240 y=12 font-size="12px" fill="#586e75" style="text-anchor: middle">8h</text>
+		<line x1="270" y1="200" x2="270" y2="15"  stroke-width="0.5" stroke="#073642" />
+		<line x1="300" y1="200" x2="300" y2="15"  stroke-width="0.5" stroke="#073642" /><text x=300 y=12 font-size="12px" fill="#586e75" style="text-anchor: middle">10h</text>
+		<line x1="330" y1="200" x2="330" y2="15"  stroke-width="0.5" stroke="#073642" />
+		<line x1="360" y1="200" x2="360" y2="15"  stroke-width="0.5" stroke="#073642" /><text x=360 y=12 font-size="12px" fill="#586e75" style="text-anchor: middle">12h</text>
+		<line x1="390" y1="200" x2="390" y2="15"  stroke-width="0.5" stroke="#073642" />
+		<line x1="420" y1="200" x2="420" y2="15"  stroke-width="0.5" stroke="#073642" /><text x=420 y=12 font-size="12px" fill="#586e75" style="text-anchor: middle">14h</text>
+		<line x1="450" y1="200" x2="450" y2="15"  stroke-width="0.5" stroke="#073642" />
+		<line x1="480" y1="200" x2="480" y2="15"  stroke-width="0.5" stroke="#073642" /><text x=480 y=12 font-size="12px" fill="#586e75" style="text-anchor: middle">16h</text>
+		<line x1="510" y1="200" x2="510" y2="15"  stroke-width="0.5" stroke="#073642" />
+		<line x1="540" y1="200" x2="540" y2="15"  stroke-width="0.5" stroke="#073642" /><text x=540 y=12 font-size="12px" fill="#586e75" style="text-anchor: middle">18h</text>
+		<line x1="570" y1="200" x2="570" y2="15"  stroke-width="0.5" stroke="#073642" />
+		<line x1="600" y1="200" x2="600" y2="15"  stroke-width="0.5" stroke="#073642" /><text x=600 y=12 font-size="12px" fill="#586e75" style="text-anchor: middle">20h</text>
+		<line x1="630" y1="200" x2="630" y2="15"  stroke-width="0.5" stroke="#073642" />
+		<line x1="660" y1="200" x2="660" y2="15"  stroke-width="0.5" stroke="#073642" /><text x=660 y=12 font-size="12px" fill="#586e75" style="text-anchor: middle">22h</text>
+		<line x1="690" y1="200" x2="690" y2="15"  stroke-width="0.5" stroke="#073642" />
+
 	</svg>
 	<script src="moment.min.js"></script>
 	<script src="pikaday.js"></script>
