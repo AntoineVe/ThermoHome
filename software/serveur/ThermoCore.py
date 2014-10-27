@@ -87,8 +87,9 @@ def courbe(date):
     c = conn.cursor()
     c.execute("SELECT date FROM recorded WHERE date LIKE ? ORDER BY date ASC", (date,))
     timepoint = c.fetchall()
-    delai = abs(int([timepoint[0] for timepoint in timepoint][0].split('-')[3])-int([timepoint[0] for timepoint in timepoint][1].split('-')[3]))
-    timepoint = [timepoint[0] for timepoint in timepoint]
+    if timepoint:
+        delai = abs(int([timepoint[0] for timepoint in timepoint][0].split('-')[3])-int([timepoint[0] for timepoint in timepoint][1].split('-')[3]))
+        timepoint = [timepoint[0] for timepoint in timepoint]
     for horloge in timepoint:
         jour = horloge.split('_')[0]
         heure = int(horloge.split('_')[1].split('-')[0])
@@ -116,6 +117,7 @@ speak2arduino() #Lance une première fois pour initialiser la variable Temp
 @bottle.get('/getTemp.txt')
 def getTemp():
     today = time.strftime("%d-%m-%Y")
+    checkdb(today)
     speak2arduino()
     recorddb(Temp)
     return bottle.template('{{temp}}', temp=Temp)
