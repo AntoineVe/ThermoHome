@@ -20,7 +20,6 @@ ARDUINO = serial.Serial('/dev/ttyUSB0', 9600) # ouvre le port série. Attention 
 time.sleep(5) #Les 5 secondes permettent de s'assurer que l'arduino est disponible
 
 defprogjour = "HHHHHHHHPPNNNNNNNNNPPPNL" #Journée par défaut (cf calcul de température par l'arduino)
-progjour = defprogjour
 
 #H 17  L 19  P 21
 #I     M
@@ -80,6 +79,7 @@ def recorddb(temp):
     conn.commit()
     conn.close()
 
+checkdb(time.strftime("%d-%m-%Y")) #Vérifie la base de données au démarrage
 speak2arduino() #Lance une première fois pour initialiser la variable Temp
 
 @bottle.get('/getTemp.txt')
@@ -96,7 +96,10 @@ def stylesheets(filename):
     return bottle.static_file(filename, root='static')
 @bottle.route('/thermostat.html') #Page de monitoring et de programmation
 def thermostat():
-    date = bottle.request.query.date
+    date = time.strftime("%d-%m-%Y")
+    httpdate = bottle.request.query.date
+    if httpdate:
+        date = httpdate
     checkdb(date)
     heure = time.strftime("%H:%M")
     speak2arduino()
